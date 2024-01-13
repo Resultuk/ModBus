@@ -1,9 +1,10 @@
 namespace Protocols;
-public class ModBusRegInfo(string name, uint address, ModBusType type)
+public class ModBusRegInfo(string name, uint address, ModBusType type, bool littleEndian = false)
 {
     public string Name { get; private set; } = name;
     public uint Address { get; private set; } = address;
     public ModBusType Type { get; private set; } = type;
+    public bool LittleEndian {get; private set; } = littleEndian;
     public int Length => Type switch
     {
         ModBusType.Double or ModBusType.UInt64 or ModBusType.Int64 => 8,

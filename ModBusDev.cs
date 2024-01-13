@@ -58,7 +58,7 @@ public abstract class ModBusDev(uint inputSize, uint holdSize)
 
         if (report.Result == ResultRequest.OK)
         {
-            lock (Params) Params.SetForRead(MagicByte.GetArray(report.Response, 3, countbyte), startbyte, countbyte);
+            ToInputRegs(report.Response.Skip(3).Take(countbyte).ToArray(), startbyte, countbyte);
         }
         return report;
     }

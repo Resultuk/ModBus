@@ -49,8 +49,9 @@ public static class Modbus
     }
     public static Report ReadRegs(IProvider? provider, uint netAddress = 1, byte function = 4, int startReg = 0, int countReg = 1, int timeout = 550)
     {
+        if (provider == null) return new Report(){ Result = ResultRequest.TransportError, ErrorMassage = "Провайдер не определен!"};
         if (countReg < 1 || countReg > 128 || startReg * 2 + countReg * 2 > ushort.MaxValue) return new Report { Result = ResultRequest.WrongRequest };
-        byte[] writeData = new byte[8] { (byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0 };
+        byte[] writeData = [(byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0];
         byte[] ReadData = new byte[countReg * 2 + 5];
         CRC16.Add(ref writeData);
         return Inquiry(provider, writeData, ref ReadData, ReadData.Length, timeout);
