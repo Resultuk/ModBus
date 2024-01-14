@@ -1,14 +1,29 @@
-using System.Reflection.Metadata;
-
 namespace Protocols;
-public abstract class ModBusDev(uint inputSize, uint holdSize)
+public abstract class ModBusDev
 {
     private readonly Dictionary<string, ModBusRegInfo> holdsInfo = [];
     private readonly Dictionary<string, ModBusRegInfo> inputsInfo = [];
-    private readonly byte[] holdsIN = new byte[holdSize];
-    private readonly byte[] holdsOUT = new byte[holdSize];
-    private readonly byte[] inputIN = new byte[inputSize];
-    private readonly byte[] inputCASH = new byte[inputSize];
+    private readonly byte[] holdsIN = [];
+    private readonly byte[] holdsOUT = [];
+    private readonly byte[] inputIN = [];
+    private readonly byte[] inputCASH = [];
+    public ModBusDev(uint inputSize, uint holdSize)
+    {
+        holdsIN = new byte[holdSize];
+        holdsOUT = new byte[holdSize];
+        inputIN = new byte[inputSize];
+        inputCASH = new byte[inputSize];
+        for(int i = 0 ; i < holdSize; i++)
+        {
+            holdsIN[i] = 0xFF;
+            holdsOUT[i] = 0xFF;
+        }
+        for(int i = 0 ; i < inputSize; i++)
+        {
+            inputIN[i] = 0xFF;
+            inputCASH[i] = 0xFF;
+        }
+    }
     public byte NetAddress { get; set; }
     public uint WaitingTime { get; set; }
     public IProvider? Provider {get; set; }
@@ -67,8 +82,37 @@ public abstract class ModBusDev(uint inputSize, uint holdSize)
         if (buffer == null || buffer.Length == 0 || offset < 0 || count < 1) throw new ArgumentException();
         Array.Copy(inputIN, offset, inputCASH, offset, count);
         Array.Copy(buffer, 0, inputIN, offset, count);
-        //List<ushort> bytesList = GetChangingBytes(offset, count);
-        //if (bytesList.Count > 0)
-        //MemoryChanged?.Invoke(this, new EventMemoryArgs() { Name = _name, Bytes = bytesList }); 
+        List<uint> bytesList = GetChangingBytes(offset, count);
+        if(bytesList.Count > 0)
+        {
+            ModBusRegInfo[] modBusRegs = GetInputsFromByteList(bytesList);
+            if(modBusRegs.Length > 0)
+                InputValueChanged?.Invoke(this, modBusRegs);
+        }
     }
+    private ModBusRegInfo[] GetInputsFromByteList(List<uint> bytesList)
+    {
+        List<ModBusRegInfo> Result = [];
+        foreach(uint byteNum in bytesList)
+        {
+           foreach (var item in inputsInfo.Values)
+            {
+                if (item.Address <= byteNum && byteNum < item.Address + item.Length)
+                    Result.Add(item);
+            }
+        }
+        return Result.ToArray();
+    }
+    private List<uint> GetChangingBytes(int count = 0, int offset = 0)
+    {
+        if(count == 0) count = (int)LengthInputs;
+        List<uint> result = [];
+        for (int i = offset; i < offset + count; i++)
+                if (inputIN[i] != inputCASH[i]) result.Add((ushort)i);
+        return result;
+    }
+    #region Events
+    public event EventHandler<ModBusRegInfo[]> InputValueChanged = delegate { };
+    public event EventHandler<ModBusRegInfo[]> HoldValueChanged = delegate { };
+    #endregion
 }
