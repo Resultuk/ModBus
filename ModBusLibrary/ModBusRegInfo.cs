@@ -1,4 +1,4 @@
-namespace Protocols;
+namespace ModBusLibrary;
 public class ModBusRegInfo(string name, uint address, ModBusType type, bool littleEndian = false)
 {
     public string Name { get; private set; } = name;

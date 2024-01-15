@@ -1,3 +1,5 @@
+namespace ModBusLibrary.Provider
+{
 public interface IProvider
 {
     public object GetSynchro();
@@ -5,4 +7,5 @@ public interface IProvider
     public int Receive(ref byte[] ReadData, int timeout);
     public bool Connect(int timeOut);
     public void Disconnect();
+}
 }

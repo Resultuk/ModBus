@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nB8/xPvqFQ9KDsSGo3A7WkkCHFimyB/ALQQxJd2FwRLjVkJSQBmFSNHR+LxmC24EHfat9tTFki/UO3JXXTqlmA==",
+  "dgSpecHash": "G9mXsyRjVQVfiyIFmOD2tcY7so0RvAlyxjvIYcZLCueLdmWnVnGOXLiVDv0oneHGfASMljiZg+eHeu+P+mQnLQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
+  "projectFilePath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\pomah\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
     "C:\\Users\\pomah\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",

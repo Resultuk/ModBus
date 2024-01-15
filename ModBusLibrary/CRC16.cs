@@ -1,4 +1,4 @@
-namespace Protocols;
+namespace ModBusLibrary;
 public static class CRC16
 {
     private static readonly byte[] crc_table =

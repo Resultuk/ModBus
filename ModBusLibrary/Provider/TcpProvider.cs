@@ -1,4 +1,6 @@
 using System.Net.Sockets;
+namespace ModBusLibrary.Provider
+{
 public class TcpProvider : IProvider
     {
         private TcpClient tcpClient = new();
@@ -70,3 +72,4 @@ public class TcpProvider : IProvider
             }
         }
     }
+}

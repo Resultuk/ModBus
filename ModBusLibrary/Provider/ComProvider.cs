@@ -1,4 +1,6 @@
- using System.IO.Ports;
+using System.IO.Ports;
+namespace ModBusLibrary.Provider
+{
 public class ComProvider : IProvider
 {
     public int BaudRate
@@ -87,3 +89,4 @@ public class ComProvider : IProvider
         }
     }
  }
+}

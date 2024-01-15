@@ -1,3 +1,8 @@
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.AssemblyInfoInputs.cache
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.AssemblyInfo.cs
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.CoreCompileInputs.cache
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.sourcelink.json
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBusTest.exe
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBusTest.deps.json
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBusTest.runtimeconfig.json
@@ -11,14 +16,9 @@ C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\osx-arm
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\unix\lib\net8.0\System.IO.Ports.dll
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.IO.Ports.dll
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBus.dll
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBus.pdb
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBusLibrary.dll
+C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\ModBusLibrary.pdb
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.AssemblyReference.cache
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.AssemblyInfoInputs.cache
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.AssemblyInfo.cs
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.CoreCompileInputs.cache
-C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.sourcelink.json
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.CopyComplete
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.dll
 C:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\refint\ModBusTest.dll

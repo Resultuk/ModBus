@@ -1,4 +1,5 @@
-namespace Protocols;
+using ModBusLibrary.Provider;
+namespace ModBusLibrary;
 public abstract class ModBusDev
 {
     private readonly Dictionary<string, ModBusRegInfo> holdsInfo = [];
@@ -110,6 +111,24 @@ public abstract class ModBusDev
         for (int i = offset; i < offset + count; i++)
                 if (inputIN[i] != inputCASH[i]) result.Add((ushort)i);
         return result;
+    }
+    public ModBusRegValue GetInputValue(ModBusRegInfo regInfo)
+    {
+        return new ModBusRegValue(  inputIN.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                    inputCASH.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                    Array.Empty<byte>()
+                                );
+    }
+    public ModBusRegValue GetInputValue(string regInfoName)
+    {
+        if(inputsInfo.TryGetValue(regInfoName, out ModBusRegInfo? regInfo))
+        {
+            return new ModBusRegValue(  inputIN.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                    inputCASH.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                    Array.Empty<byte>()
+                                );
+        }
+        return new ModBusRegValue([], [], []);
     }
     #region Events
     public event EventHandler<ModBusRegInfo[]> InputValueChanged = delegate { };

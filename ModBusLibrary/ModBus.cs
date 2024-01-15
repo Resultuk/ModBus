@@ -1,4 +1,5 @@
-﻿namespace Protocols;
+﻿using ModBusLibrary.Provider;
+namespace ModBusLibrary;
 public static class Modbus
 {
     private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 550)
@@ -13,6 +14,7 @@ public static class Modbus
                 {
                     swapResult.RequestTime = DateTime.Now;
                     provider.Send(writeData);
+                    System.Threading.Thread.Sleep(15);
                     int countReadBytes = provider.Receive(ref readData, timeout);
                     swapResult.ResponseTime = DateTime.Now;
                     swapResult.Response = readData;

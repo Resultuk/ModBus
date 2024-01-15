@@ -1,4 +1,4 @@
-namespace Protocols;
+namespace ModBusLibrary;
 public class Report
 {
     public DateTime RequestTime { get; set; }
