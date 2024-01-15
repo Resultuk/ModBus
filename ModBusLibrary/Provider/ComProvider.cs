@@ -55,7 +55,7 @@ public class ComProvider : IProvider
                     port.Close();
             return true;
         }
-        catch (Exception)
+        catch (Exception) 
         {
             return false;
         }
@@ -95,5 +95,5 @@ public class ComProvider : IProvider
             }
         }
     }
- }
+    }
 }

@@ -32,9 +32,10 @@ public class TcpProvider : IProvider
             return false;
         }
 
-        public void Disconnect()
+        public bool Disconnect()
         {
             tcpClient.Close();
+            return true;
         }
 
         public object GetSynchro()

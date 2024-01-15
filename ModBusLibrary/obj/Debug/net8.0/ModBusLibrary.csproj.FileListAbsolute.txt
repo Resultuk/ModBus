@@ -11,3 +11,16 @@ c:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrar
 c:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\refint\ModBusLibrary.dll
 c:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.pdb
 c:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ref\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.csproj.AssemblyReference.cache
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.AssemblyInfoInputs.cache
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.AssemblyInfo.cs
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.csproj.CoreCompileInputs.cache
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.sourcelink.json
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\refint\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ModBusLibrary.pdb
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\net8.0\ModBusLibrary.deps.json
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\net8.0\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\net8.0\ModBusLibrary.pdb
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net8.0\ref\ModBusLibrary.dll
