@@ -1,10 +1,31 @@
+using System.Collections;
 namespace ModBusLibrary;
-public class ModBusRegInfo(string name, uint address, ModBusType type, bool littleEndian = false)
+public class ModBusRegInfo : IEqualityComparer
 {
-    public string Name { get; private set; } = name;
-    public uint Address { get; private set; } = address;
-    public ModBusType Type { get; private set; } = type;
-    public bool LittleEndian {get; private set; } = littleEndian;
+    private uint number = 0;
+    public string Name { get; private set; } = string.Empty;
+    public uint Address => number * 2;
+    public uint Number 
+    { 
+        get => number; 
+        private set
+        {
+            if(value != number)
+            {
+                number = value;
+            }
+        }
+    }
+    public ModBusRegInfo(string name, uint regNumber, ModBusType regType, bool littleEndian = false)
+    {
+        Name = name;
+        Number = regNumber;
+        Type = regType;
+        LittleEndian = littleEndian;
+    }
+    public ModBusType Type { get; private set; } = ModBusType.Byte;
+    public bool LittleEndian {get; private set; } = false;
+    public bool NeedFlip {get; set;} = false;
     public int Length => Type switch
     {
         ModBusType.Double or ModBusType.UInt64 or ModBusType.Int64 => 8,
@@ -15,7 +36,15 @@ public class ModBusRegInfo(string name, uint address, ModBusType type, bool litt
         ModBusType.String => 16,
         _ => 0,
     };
-
+    public new bool Equals(object? x, object? y)
+    {
+        if(x == null || y == null) return false;
+        return ((ModBusRegInfo)x).Name.Equals(((ModBusRegInfo)y).Name);
+    }
+    public int GetHashCode(object obj)
+    {
+        throw new NotImplementedException();
+    }
 }
 public enum ModBusType
 {

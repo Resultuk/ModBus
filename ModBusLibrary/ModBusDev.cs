@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using ModBusLibrary.Provider;
 namespace ModBusLibrary;
 public abstract class ModBusDev
@@ -67,7 +68,7 @@ public abstract class ModBusDev
         int k = 0;
         do
         {
-            report = Modbus.ReadRegs(Provider, 1, (byte)ModBusFunc.ReadInput, startReg, countRegs, (int)WaitingTime);
+            report = Modbus.ReadRegs(Provider, NetAddress, (byte)ModBusFunc.ReadInput, startReg, countRegs, (int)WaitingTime);
         }
         while (report.Result != ResultRequest.OK && k++ < 3);
         report.NumberOfRequery = k;
@@ -102,7 +103,7 @@ public abstract class ModBusDev
                     Result.Add(item);
             }
         }
-        return Result.ToArray();
+        return Result.Distinct().ToArray();
     }
     private List<uint> GetChangingBytes(int count = 0, int offset = 0)
     {

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModBusLib", "ModBusLib\ModBusLib.csproj", "{CE982F08-2ADE-4034-8F0D-5DB74EC57E6D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModBusTest", "ModBusTest\ModBusTest.csproj", "{40B6E855-91C6-493D-BE79-93F37D8026FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModBusLibrary", "ModBusLibrary\ModBusLibrary.csproj", "{5B0CA0E6-C9A1-4A4D-B58C-9CF5D1B4F2E6}"

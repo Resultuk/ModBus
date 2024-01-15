@@ -1,15 +1,16 @@
-﻿using ModBusLibrary;
+﻿using System;
+using ModBusLibrary;
 using ModBusLibrary.Provider;
 
 namespace ModBusTest
 {
     internal class Program
     {
-        static MyDev rv = new(816, 332);
+        static MyDev rv = new(816, 332){ NetAddress = 1, WaitingTime = 500};
         static void Main(string[] args)
         {
             rv.Provider = new ComProvider(){ PortName = "COM2", BaudRate = 19200};
-            rv.AddInputRegsInfo([new ModBusRegInfo("T1", 0xD6 * 2, ModBusType.Float), new ModBusRegInfo("T2", 0xD8 * 2, ModBusType.Float)]);
+            rv.AddInputRegsInfo([new ModBusRegInfo("T1", 0xD6, ModBusType.Float), new ModBusRegInfo("T2", 0xD8, ModBusType.Float)]);
             rv.InputValueChanged += rv_InputValueChanged;
 
             while(true)
@@ -21,10 +22,17 @@ namespace ModBusTest
         public class MyDev(uint inputSize, uint holdSize) : ModBusDev(inputSize, holdSize)
         {
             public float T1 => BitConverter.ToSingle(GetInputValue("T1").Now.Flip(), 0);
+            public float T2 => BitConverter.ToSingle(GetInputValue("T2").Now.Flip(), 0);
         }
-        static void rv_InputValueChanged(object sender, ModBusRegInfo[] e)
+        static void rv_InputValueChanged(object? sender, ModBusRegInfo[] e)
         {
-            Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - {rv.T1}");
+            foreach(ModBusRegInfo item in e)
+            {
+                if(item.Name.Equals("T1"))
+                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T1 = {rv.T1:F2}°C");
+                if(item.Name.Equals("T2"))
+                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T2 = {rv.T2:F2}°C");
+            }
         }
 
     }

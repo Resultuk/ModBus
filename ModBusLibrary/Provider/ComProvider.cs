@@ -21,18 +21,24 @@ public class ComProvider : IProvider
         {
             if (!port.PortName.Equals(value))
             {
-                if (port.IsOpen) port.Close();
-                port.PortName = value;
+                lock(synchro)
+                {
+                    if (port.IsOpen) 
+                        port.Close();
+                    port.PortName = value;
+                }
             }
         }
     }
-    private SerialPort port = new();
-    private object Synchro = new();
+    private readonly SerialPort port = new();
+    private readonly object synchro = new();
     public bool Connect(int timeOut)
     {
         try
         {
-            if (!port.IsOpen) port.Open();
+            lock(synchro)
+                if (!port.IsOpen) 
+                    port.Open();
             return true;
         }
         catch (Exception)
@@ -40,26 +46,27 @@ public class ComProvider : IProvider
             return false;
         }
     }
-    public void Disconnect()
+    public bool Disconnect()
     {
-        lock (Synchro)
+        try
         {
-            try
-            {
-                if (port.IsOpen) port.Close();
-            }
-            catch (Exception)
-            {
-            }
+            lock(synchro)
+                if (port.IsOpen) 
+                    port.Close();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
         }
     }
     public object GetSynchro()
     {
-        return Synchro;
+        return synchro;
     }
     public int Receive(ref byte[] ReadData, int timeout)
     {
-        lock (Synchro)
+        lock (synchro)
         {
             try
             {
@@ -68,7 +75,7 @@ public class ComProvider : IProvider
                 port.ReadTimeout = timeout;
                 return port.Read(ReadData, 0, ReadData.Length);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return 0;
             }
@@ -76,7 +83,7 @@ public class ComProvider : IProvider
     }
     public void Send(byte[] WriteData)
     {
-        lock (Synchro)
+        lock (synchro)
         {
             try
             {
