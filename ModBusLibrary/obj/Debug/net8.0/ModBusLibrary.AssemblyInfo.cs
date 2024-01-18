@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ModBusLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+053540006e83f362c7c31b39b5e007b34114651a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8edcdbac240e29de0118377c547cbeae75b7bf7")]
 [assembly: System.Reflection.AssemblyProductAttribute("ModBusLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ModBusLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

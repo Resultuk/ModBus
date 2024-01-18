@@ -1,27 +1,25 @@
 using System.IO.Ports;
 namespace ModBusLibrary.Provider
 {
-public class ComProvider : IProvider
-{
-    public int BaudRate
+    public class ComProvider : IProvider
     {
-        get => port.BaudRate;
-        set
+        public int BaudRate
         {
-            if (port.BaudRate != value)
+            get => port.BaudRate;
+            set
             {
-                port.BaudRate = value;
+                if (port.BaudRate != value)
+                {
+                    port.BaudRate = value;
+                }
             }
         }
-    }
-    public string PortName
-    {
-        get => port.PortName;
-        set
+        public string PortName
         {
-            if (!port.PortName.Equals(value))
+            get => port.PortName;
+            set
             {
-                lock(synchro)
+                if (!port.PortName.Equals(value))
                 {
                     if (port.IsOpen) 
                         port.Close();
@@ -29,44 +27,36 @@ public class ComProvider : IProvider
                 }
             }
         }
-    }
-    private readonly SerialPort port = new();
-    private readonly object synchro = new();
-    public bool Connect(int timeOut)
-    {
-        try
+        private readonly SerialPort port = new();
+        private readonly object synchro = new();
+        public object GetSynchro => synchro;
+        public bool Connect(int timeOut)
         {
-            lock(synchro)
+            try
+            {
                 if (!port.IsOpen) 
                     port.Open();
-            return true;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
-        catch (Exception)
+        public bool Disconnect()
         {
-            return false;
-        }
-    }
-    public bool Disconnect()
-    {
-        try
-        {
-            lock(synchro)
+            try
+            {
                 if (port.IsOpen) 
                     port.Close();
-            return true;
+                return true;
+            }
+            catch (Exception) 
+            {
+                return false;
+            }
         }
-        catch (Exception) 
-        {
-            return false;
-        }
-    }
-    public object GetSynchro()
-    {
-        return synchro;
-    }
-    public int Receive(ref byte[] ReadData, int timeout)
-    {
-        lock (synchro)
+        public int Receive(ref byte[] ReadData, int timeout)
         {
             try
             {
@@ -75,15 +65,12 @@ public class ComProvider : IProvider
                 port.ReadTimeout = timeout;
                 return port.Read(ReadData, 0, ReadData.Length);
             }
-            catch (Exception ex)
+            catch
             {
                 return 0;
             }
         }
-    }
-    public void Send(byte[] WriteData)
-    {
-        lock (synchro)
+        public void Send(byte[] WriteData)
         {
             try
             {
@@ -94,6 +81,5 @@ public class ComProvider : IProvider
             {
             }
         }
-    }
     }
 }

@@ -7,6 +7,18 @@ namespace ModBusTest
     internal class Program
     {
         static MyDev rv = new(816, 332){ NetAddress = 1, WaitingTime = 500};
+        static Dictionary<string, Calculator> ParamDict = new(
+                                                                [
+                                                                    new KeyValuePair<string, Calculator>("T1", new Calculator("T1", "°C")),
+                                                                    new KeyValuePair<string, Calculator>("T2", new Calculator("T2", "°C")),
+                                                                    new KeyValuePair<string, Calculator>("P1", new Calculator("P1", "МПа") { Precision = 3}),
+                                                                    new KeyValuePair<string, Calculator>("P2", new Calculator("P2", "МПа") { Precision = 3}),
+                                                                    new KeyValuePair<string, Calculator>("T1Om", new Calculator("T1Om", "Ом")),
+                                                                    new KeyValuePair<string, Calculator>("T2Om", new Calculator("T2Om", "Ом")),
+                                                                    new KeyValuePair<string, Calculator>("P1mA", new Calculator("P1mA", "мА")),
+                                                                    new KeyValuePair<string, Calculator>("P2mA", new Calculator("P2mA", "мА")),
+                                                                ]
+                                                            );
         static void Main(string[] args)
         {
             rv.Provider = new ComProvider(){ PortName = "COM2", BaudRate = 19200};
@@ -43,20 +55,20 @@ namespace ModBusTest
         {
             foreach(ModBusRegInfo item in e)
             {
-                if(item.Name.Equals("T1"))
-                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T1 = {rv.T1:F2} °C");
-                if(item.Name.Equals("T2"))
-                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T2 = {rv.T2:F2} °C");
-                if(item.Name.Equals("P1"))
-                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T1 = {rv.P1:F3} МПа");
-                if(item.Name.Equals("P2"))
-                    Console.WriteLine($"{DateTime.Now:HH:mm:ss.fff} - T2 = {rv.P2:F3} МПа");
+                switch(item.Name)
+                {
+                    case "T1" : ParamDict[item.Name].Value = rv.T1; break;
+                    case "T2" : ParamDict[item.Name].Value = rv.T2; break;
+                    case "P1" : ParamDict[item.Name].Value = rv.P1; break;
+                    case "P2" : ParamDict[item.Name].Value = rv.P2; break;
+                }
+                Console.WriteLine($"{ParamDict[item.Name]}");
             }
         }
 
     }
-        public static class MyExtensions
-        {
+    public static class MyExtensions
+    {
         public static byte[] Flip(this byte[] bytes)
         {
             byte[] Result = new byte[bytes.Length];
@@ -67,5 +79,60 @@ namespace ModBusTest
             }
             return Result;
         }
+    }
+    public class Calculator(string name, string units = "")
+    {
+        private double value = double.NaN;
+        private double minValue = double.NaN;
+        private double maxValue = double.NaN;
+        private double sum = 0;
+        private long count = 0;
+
+        public string Name = name;
+        public string UnitsOfMeasurement {get; set;} = units;
+        public double Value
+        {
+            get => value;
+            set
+            {
+                this.value = value; LastChanges = DateTime.Now;
+                if (count == 0)
+                {
+                    Max = value;
+                    Min = value;
+                    sum = value;
+                    FirstChanges = DateTime.Now;
+                }
+                else
+                {
+                    if (value > Max) Max = value;
+                    if (value < Min) Min = value;
+                    sum += value;
+                }
+                count++;
+            }
         }
+        public DateTime FirstChanges { get; private set; }
+        public DateTime ResetTime { get; private set; }
+        public DateTime LastChanges { get; private set; }
+        public int Precision { get; set; } = 2;
+        public double Min { get => minValue; private set => minValue = value; }
+        public double Max { get => maxValue; private set => maxValue = value; }
+        public double Avg { get => count == 0 ? 0 : sum / count; }
+        public void Reset()
+        {
+            Value = double.NaN;
+            Min = double.NaN;
+            Max = double.NaN;
+            sum = 0;
+            count = 0;
+            ResetTime = DateTime.Now;
+            FirstChanges = DateTime.MinValue;
+            LastChanges = DateTime.MinValue;
+        }
+        public override string ToString()
+        {
+            return $"{Name}-{Math.Round(Value, Precision)}; Min:{Math.Round(Min, Precision)}; Avg:{Math.Round(Avg, Precision)}; Max:{Math.Round(Max, Precision)} {UnitsOfMeasurement}";
+        }
+    }
 }

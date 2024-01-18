@@ -4,7 +4,8 @@ namespace ModBusLibrary.Provider
 public class TcpProvider : IProvider
     {
         private TcpClient tcpClient = new();
-        private readonly object Synchro = new();
+        private readonly object synchro = new();
+        public object GetSynchro => synchro; 
         public string Url = string.Empty;
         public int Port;
         public bool Connect(int timeOut)
@@ -31,45 +32,31 @@ public class TcpProvider : IProvider
             }
             return false;
         }
-
         public bool Disconnect()
         {
             tcpClient.Close();
             return true;
         }
-
-        public object GetSynchro()
-        {
-            return Synchro;
-        }
-
         public int Receive(ref byte[] ReadData, int timeout)
         {
-            lock (Synchro)
+            try
             {
-                try
-                {
-                    tcpClient.ReceiveTimeout = timeout;
-                    return tcpClient.Client.Receive(ReadData, SocketFlags.None);
-                }
-                catch (Exception)
-                {
-                    return 0;
-                }
+                tcpClient.ReceiveTimeout = timeout;
+                return tcpClient.Client.Receive(ReadData, SocketFlags.None);
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
         public void Send(byte[] WriteData)
         {
-            lock (Synchro)
+            try
             {
-                try
-                {
-                    tcpClient.Client.Send(WriteData);
-                }
-                catch (Exception)
-                {
-
-                }
+                tcpClient.Client.Send(WriteData);
+            }
+            catch (Exception)
+            {
             }
         }
     }

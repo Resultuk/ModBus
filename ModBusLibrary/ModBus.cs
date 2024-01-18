@@ -5,7 +5,7 @@ public static class Modbus
     private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 5500)
     {
         Report swapResult = new();
-        lock (provider.GetSynchro())
+        lock (provider.GetSynchro)
         {
             swapResult = new Report() { Request = writeData };
             try
