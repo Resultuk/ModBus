@@ -9,7 +9,6 @@ public class Report
     public byte[] Request { get; set; } = Array.Empty<byte>();
     public byte[] Response { get; set; } = Array.Empty<byte>();
     public ResultRequest Result { get; set; }
-    public int NumberOfRequery { get; set; }
     public string ErrorMassage { get; set; } = String.Empty;
     public override string ToString()
     {

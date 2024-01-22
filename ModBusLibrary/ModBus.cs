@@ -6,7 +6,7 @@ namespace ModBusLibrary
 {
 public static class Modbus
 {
-    private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 5500)
+    private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 550)
     {
         Report swapResult = new Report();
         lock (provider.GetSynchro)
