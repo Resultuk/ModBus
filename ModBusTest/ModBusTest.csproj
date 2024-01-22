@@ -1,6 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\ModBusLibrary\ModBusLibrary.csproj" />
+    <ProjectReference Include="..\ModBusLibrary\ModBusLibrary.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="8.0.0"/>
   </ItemGroup>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,5 +11,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>

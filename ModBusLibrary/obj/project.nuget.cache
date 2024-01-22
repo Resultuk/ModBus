@@ -1,16 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Il42s4Fyh52/Xh8nQskWGlsgCsBSuYjJfQ71jrmigtd8DuT2S4+7P8HTniZbGPKVQBgQYLojGU98UHLkMpvgqw==",
+  "dgSpecHash": "HLCZvIhU7YYlTK7Dwep8qBiKy/SPRx5wf/mj2/8yZJC9ntgulc0bI8Eg/vPVhrSGJDO7/5disPv4GKt3MW74fg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\8.0.0\\runtime.linux-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.native.system.io.ports\\8.0.0\\runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\8.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\8.0.0\\runtime.osx-x64.runtime.native.system.io.ports.8.0.0.nupkg.sha512",
-    "C:\\Users\\pomah\\.nuget\\packages\\system.io.ports\\8.0.0\\system.io.ports.8.0.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,5 +1,6 @@
 using System.Collections;
-namespace ModBusLibrary;
+namespace ModBusLibrary
+{
 public class ModBusRegInfo : IEqualityComparer
 {
     private uint number = 0;
@@ -26,26 +27,40 @@ public class ModBusRegInfo : IEqualityComparer
     public ModBusType Type { get; private set; } = ModBusType.Byte;
     public bool LittleEndian {get; private set; } = false;
     public bool NeedFlip {get; set;} = false;
-    public int Length => Type switch
+    public int Length
     {
-        ModBusType.Double or ModBusType.UInt64 or ModBusType.Int64 => 8,
-        ModBusType.Float or ModBusType.UInt32 or ModBusType.Int32 => 4,
-        ModBusType.UInt16 or ModBusType.Int16 => 2,
-        ModBusType.Byte or ModBusType.Char or ModBusType.Bool => 1,
-        ModBusType.DateTime => 6,
-        ModBusType.String => 16,
-        _ => 0,
-    };
-    public new bool Equals(object? x, object? y)
+        get
+        {
+            switch(Type)
+            {
+                case ModBusType.Double  : return 8;
+                case ModBusType.UInt64  : return 8;
+                case ModBusType.Int64   : return 8;
+                case ModBusType.Float   : return 4;
+                case ModBusType.UInt32  : return 4;
+                case ModBusType.Int32   : return 4;
+                case ModBusType.UInt16  : return 2;
+                case ModBusType.Int16   : return 2;
+                case ModBusType.Byte    : return 1;
+                case ModBusType.Char    : return 1;
+                case ModBusType.Bool    : return 1;
+                case ModBusType.DateTime: return 6;
+                case ModBusType.String  : return 16;
+                default : return 0;
+            }
+        }
+    }
+    public new bool Equals(object x, object y)
     {
         if(x == null || y == null) return false;
         return ((ModBusRegInfo)x).Name.Equals(((ModBusRegInfo)y).Name);
     }
-    public int GetHashCode(object obj)
-    {
-        throw new NotImplementedException();
+
+        public int GetHashCode(object obj)
+        {
+            throw new System.NotImplementedException();
+        }
     }
-}
 public enum ModBusType
 {
     Bool        = 0,
@@ -62,4 +77,5 @@ public enum ModBusType
     TimeStamp   = 11,
     DateTime    = 12,
     String      = 13,
+}
 }

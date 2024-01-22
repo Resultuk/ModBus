@@ -1,4 +1,7 @@
-namespace ModBusLibrary;
+using System;
+
+namespace ModBusLibrary
+{
 public static class CRC16
 {
     private static readonly byte[] crc_table =
@@ -65,8 +68,9 @@ public static class CRC16
         if (Mass.Length > 2)
         {
             ushort Crc16 = Calculate(Mass, Mass.Length - 2);
-            Mass[^2] = (byte)(Crc16 >> 8);
-            Mass[^1] = (byte)(Crc16 & 0xff);
+            Mass[Mass.Length - 2] = (byte)(Crc16 >> 8);
+            Mass[Mass.Length - 1] = (byte)(Crc16 & 0xff);
         }
     }
+}
 }

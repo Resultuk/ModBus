@@ -1,0 +1,6 @@
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.csproj.AssemblyReference.cache
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.AssemblyInfoInputs.cache
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.AssemblyInfo.cs
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.csproj.CoreCompileInputs.cache
+C:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\net472\ModBusLibrary.sourcelink.json

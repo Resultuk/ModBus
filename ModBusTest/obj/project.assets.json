@@ -86,17 +86,14 @@
           }
         }
       },
-      "ModBusLibrary/1.0.0": {
+      "ModBusLib/1.0.3": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "System.IO.Ports": "8.0.0"
-        },
+        "framework": ".NETStandard,Version=v2.1",
         "compile": {
-          "bin/placeholder/ModBusLibrary.dll": {}
+          "bin/placeholder/ModBusLib.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ModBusLibrary.dll": {}
+          "bin/placeholder/ModBusLib.dll": {}
         }
       }
     }
@@ -239,7 +236,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "ModBusLibrary/1.0.0": {
+    "ModBusLib/1.0.3": {
       "type": "project",
       "path": "../ModBusLibrary/ModBusLibrary.csproj",
       "msbuildProject": "../ModBusLibrary/ModBusLibrary.csproj"
@@ -247,7 +244,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "ModBusLibrary >= 1.0.0"
+      "ModBusLib >= 1.0.3",
+      "System.IO.Ports >= 8.0.0"
     ]
   },
   "packageFolders": {
@@ -257,11 +255,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
+      "projectUniqueName": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
       "projectName": "ModBusTest",
-      "projectPath": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
+      "projectPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
       "packagesPath": "C:\\Users\\pomah\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\obj\\",
+      "outputPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -283,8 +281,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
-              "projectPath": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj"
+            "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
+              "projectPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj"
             }
           }
         }
@@ -298,6 +296,12 @@
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
+        "dependencies": {
+          "System.IO.Ports": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

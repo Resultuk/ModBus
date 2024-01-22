@@ -1,10 +1,14 @@
-﻿using ModBusLibrary.Provider;
-namespace ModBusLibrary;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using ModBusLibrary.Provider;
+namespace ModBusLibrary
+{
 public static class Modbus
 {
     private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 5500)
     {
-        Report swapResult = new();
+        Report swapResult = new Report();
         lock (provider.GetSynchro)
         {
             swapResult = new Report() { Request = writeData };
@@ -48,11 +52,11 @@ public static class Modbus
         }
         return swapResult;
     }
-    public static Report ReadRegs(IProvider? provider, uint netAddress = 1, byte function = 4, int startReg = 0, int countReg = 1, int timeout = 550)
+    public static Report ReadRegs(IProvider provider, uint netAddress = 1, byte function = 4, int startReg = 0, int countReg = 1, int timeout = 550)
     {
         if (provider == null) return new Report(){ Result = ResultRequest.TransportError, ErrorMassage = "Провайдер не определен!"};
         if (countReg < 1 || countReg > 128 || startReg * 2 + countReg * 2 > ushort.MaxValue) return new Report { Result = ResultRequest.WrongRequest };
-        byte[] writeData = [(byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0];
+        byte[] writeData = new byte[]{ (byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0 };
         byte[] ReadData = new byte[countReg * 2 + 5];
         CRC16.Add(ref writeData);
         return Inquiry(provider, writeData, ref ReadData, ReadData.Length, timeout);
@@ -106,18 +110,18 @@ public static class Modbus
     public static async Task<Report> ReadRegsAsync(IProvider provider, uint netAddress = 1, byte function = 4, int startReg = 0, int countReg = 1, int timeout = 550)
     {
         if (countReg < 1 || countReg > 128 || startReg * 2 + countReg * 2 > ushort.MaxValue) return new Report { Result = ResultRequest.WrongRequest };
-        byte[] writeData = [(byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0];
+        byte[] writeData = new byte[] {(byte)netAddress, function, (byte)(startReg >> 8), (byte)startReg, (byte)(countReg >> 8), (byte)countReg, 0, 0 };
         byte[] ReadData = new byte[countReg * 2 + 5];
         CRC16.Add(ref writeData);
         return await Task.Run(() => Inquiry(provider, writeData, ref ReadData, ReadData.Length, timeout));
     }
     private static Dictionary<ushort, ushort> SequenceToIntervalList(List<ushort> list)
     {
-        if (list == null || list.Count == 0) return [];
+        if (list == null || list.Count == 0) return new Dictionary<ushort, ushort>();
         list.Sort();
         ushort Prev = 0;
         ushort LastInsert = 0;
-        Dictionary<ushort, ushort> Result = [];
+        Dictionary<ushort, ushort> Result = new Dictionary<ushort, ushort>();
         foreach (ushort item in list)
         {
             if (Result.Count == 0) 
@@ -159,4 +163,5 @@ public enum ModBusFunc
     ReadInput = 4,
     ReadHold = 3,
     WriteHold = 16
+}
 }

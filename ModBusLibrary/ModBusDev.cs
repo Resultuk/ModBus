@@ -1,14 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using ModBusLibrary.Provider;
-namespace ModBusLibrary;
+namespace ModBusLibrary
+{
 public abstract class ModBusDev
 {
-    private readonly Dictionary<string, ModBusRegInfo> holdsInfo = [];
-    private readonly Dictionary<string, ModBusRegInfo> inputsInfo = [];
-    private readonly byte[] holdsIN = [];
-    private readonly byte[] holdsOUT = [];
-    private readonly byte[] inputIN = [];
-    private readonly byte[] inputCASH = [];
+    private readonly Dictionary<string, ModBusRegInfo> holdsInfo = new Dictionary<string, ModBusRegInfo>();
+    private readonly Dictionary<string, ModBusRegInfo> inputsInfo = new Dictionary<string, ModBusRegInfo>();
+    private readonly byte[] holdsIN = new byte[0];
+    private readonly byte[] holdsOUT = new byte[0];
+    private readonly byte[] inputIN = new byte[0];
+    private readonly byte[] inputCASH = new byte[0];
     public ModBusDev(uint inputSize, uint holdSize)
     {
         holdsIN = new byte[holdSize];
@@ -28,7 +32,7 @@ public abstract class ModBusDev
     }
     public byte NetAddress { get; set; }
     public uint WaitingTime { get; set; }
-    public IProvider? Provider {get; set; }
+    public IProvider Provider {get; set; }
     public uint LengthInputs => (uint)inputIN.Length;
     public uint LengthHolds => (uint)holdsIN.Length;
     public bool AnyDataForWriting => !Enumerable.SequenceEqual(holdsIN, holdsOUT);
@@ -41,8 +45,15 @@ public abstract class ModBusDev
         int Result = 0;
         foreach( ModBusRegInfo item in modBusRegInfos)
         {
-            if(holdsInfo.TryAdd(item.Name, item)) 
+            try
+            {
+                holdsInfo.Add(item.Name, item); 
                 Result++;
+            }
+            catch
+            {
+                
+            }
         }
         return Result;
     }
@@ -51,8 +62,15 @@ public abstract class ModBusDev
         int Result = 0;
         foreach( ModBusRegInfo item in modBusRegInfos)
         {
-            if(inputsInfo.TryAdd(item.Name, item)) 
+            try
+            {
+                inputsInfo.Add(item.Name, item); 
                 Result++;
+            }
+            catch
+            {
+                
+            }
         }
         return Result;
     }
@@ -94,7 +112,7 @@ public abstract class ModBusDev
     }
     private ModBusRegInfo[] GetInputsFromByteList(List<uint> bytesList)
     {
-        List<ModBusRegInfo> Result = [];
+        List<ModBusRegInfo> Result = new List<ModBusRegInfo>();
         foreach(uint byteNum in bytesList)
         {
            foreach (var item in inputsInfo.Values)
@@ -108,7 +126,7 @@ public abstract class ModBusDev
     private List<uint> GetChangingBytes(int count = 0, int offset = 0)
     {
         if(count == 0) count = (int)LengthInputs;
-        List<uint> result = [];
+        List<uint> result = new List<uint>();
         for (int i = offset; i < offset + count; i++)
                 if (inputIN[i] != inputCASH[i]) result.Add((ushort)i);
         return result;
@@ -122,17 +140,18 @@ public abstract class ModBusDev
     }
     public ModBusRegValue GetInputValue(string regInfoName)
     {
-        if(inputsInfo.TryGetValue(regInfoName, out ModBusRegInfo? regInfo))
+        if(inputsInfo.TryGetValue(regInfoName, out ModBusRegInfo regInfo))
         {
             return new ModBusRegValue(  inputIN.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
                                     inputCASH.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
                                     Array.Empty<byte>()
                                 );
         }
-        return new ModBusRegValue([], [], []);
+        return new ModBusRegValue(new byte[0], new byte[0], new byte[0]);
     }
     #region Events
     public event EventHandler<ModBusRegInfo[]> InputValueChanged = delegate { };
     public event EventHandler<ModBusRegInfo[]> HoldValueChanged = delegate { };
     #endregion
+}
 }

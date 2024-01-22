@@ -1,4 +1,7 @@
-namespace ModBusLibrary;
+using System;
+
+namespace ModBusLibrary
+{
 public class Report
 {
     public DateTime RequestTime { get; set; }
@@ -25,4 +28,5 @@ public enum ResultRequest
     NoChanges,
     BroadCast,
     WrongData
+}
 }

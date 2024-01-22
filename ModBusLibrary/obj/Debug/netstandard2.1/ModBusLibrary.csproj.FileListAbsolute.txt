@@ -1,0 +1,10 @@
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.AssemblyInfoInputs.cache
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.AssemblyInfo.cs
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.csproj.CoreCompileInputs.cache
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.sourcelink.json
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\netstandard2.1\ModBusLibrary.deps.json
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\netstandard2.1\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\bin\Debug\netstandard2.1\ModBusLibrary.pdb
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.dll
+c:\Users\pomah\!Repos\Result\ModBus\ModBusLibrary\obj\Debug\netstandard2.1\ModBusLibrary.pdb

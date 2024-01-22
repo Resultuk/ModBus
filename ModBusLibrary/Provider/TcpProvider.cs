@@ -1,10 +1,11 @@
+using System;
 using System.Net.Sockets;
 namespace ModBusLibrary.Provider
 {
 public class TcpProvider : IProvider
     {
-        private TcpClient tcpClient = new();
-        private readonly object synchro = new();
+        private TcpClient tcpClient = new TcpClient();
+        private readonly object synchro = new object();
         public object GetSynchro => synchro; 
         public string Url = string.Empty;
         public int Port;
