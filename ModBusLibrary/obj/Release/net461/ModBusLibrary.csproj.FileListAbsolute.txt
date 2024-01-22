@@ -1,0 +1,10 @@
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\bin\Release\net461\ModBusLibrary.dll
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\bin\Release\net461\ModBusLibrary.pdb
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.csproj.AssemblyReference.cache
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.AssemblyInfoInputs.cache
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.AssemblyInfo.cs
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.sourcelink.json
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.dll
+C:\Users\Result\!Repos\Result\ModBus\ModBusLibrary\obj\Release\net461\ModBusLibrary.pdb

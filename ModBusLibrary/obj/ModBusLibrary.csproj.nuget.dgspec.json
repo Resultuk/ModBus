@@ -1,29 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {}
+    "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
-      "version": "1.0.3",
+    "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
+      "version": "1.0.4",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
+        "projectUniqueName": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
         "projectName": "ModBusLib",
-        "projectPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
-        "packagesPath": "C:\\Users\\pomah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\obj\\",
+        "projectPath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
+        "packagesPath": "C:\\Users\\Result\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\pomah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Result\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net462",
+          "net461",
           "netstandard2.1"
         ],
         "sources": {
@@ -32,8 +32,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net462": {
-            "targetAlias": "net462",
+          "net461": {
+            "targetAlias": "net461",
             "projectReferences": {}
           },
           "netstandard2.1": {
@@ -48,8 +48,8 @@
         }
       },
       "frameworks": {
-        "net462": {
-          "targetAlias": "net462",
+        "net461": {
+          "targetAlias": "net461",
           "dependencies": {
             "Microsoft.NETFramework.ReferenceAssemblies": {
               "suppressParent": "All",
@@ -58,7 +58,7 @@
               "autoReferenced": true
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

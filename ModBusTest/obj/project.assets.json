@@ -86,7 +86,7 @@
           }
         }
       },
-      "ModBusLib/1.0.3": {
+      "ModBusLib/1.0.4": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "compile": {
@@ -236,7 +236,7 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "ModBusLib/1.0.3": {
+    "ModBusLib/1.0.4": {
       "type": "project",
       "path": "../ModBusLibrary/ModBusLibrary.csproj",
       "msbuildProject": "../ModBusLibrary/ModBusLibrary.csproj"
@@ -244,28 +244,28 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "ModBusLib >= 1.0.3",
+      "ModBusLib >= 1.0.4",
       "System.IO.Ports >= 8.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pomah\\.nuget\\packages\\": {},
+    "C:\\Users\\Result\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
+      "projectUniqueName": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
       "projectName": "ModBusTest",
-      "projectPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
-      "packagesPath": "C:\\Users\\pomah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusTest\\obj\\",
+      "projectPath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusTest\\ModBusTest.csproj",
+      "packagesPath": "C:\\Users\\Result\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\pomah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Result\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -281,8 +281,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
-              "projectPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj"
+            "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj": {
+              "projectPath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj"
             }
           }
         }
@@ -318,7 +318,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
