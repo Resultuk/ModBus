@@ -13,6 +13,7 @@
         "packagesPath": "C:\\Users\\pomah\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\obj\\",
         "projectStyle": "PackageReference",
+        "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
@@ -22,6 +23,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
+          "net462",
           "netstandard2.1"
         ],
         "sources": {
@@ -30,6 +32,10 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
+          "net462": {
+            "targetAlias": "net462",
+            "projectReferences": {}
+          },
           "netstandard2.1": {
             "targetAlias": "netstandard2.1",
             "projectReferences": {}
@@ -42,6 +48,18 @@
         }
       },
       "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
+        },
         "netstandard2.1": {
           "targetAlias": "netstandard2.1",
           "imports": [
