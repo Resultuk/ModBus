@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ModBusTest
-build_property.ProjectDir = C:\Users\Result\!Repos\Result\ModBus\ModBusTest\
+build_property.ProjectDir = c:\Users\pomah\!Repos\Result\ModBus\ModBusTest\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -49,8 +49,11 @@ namespace ModBusLibrary.Provider
         {
             try
             {
-                if (port.IsOpen) 
+                if (port.IsOpen)
+                {
+                    port.BaseStream.Close();
                     port.Close();
+                }
                 return true;
             }
             catch (Exception) 
