@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "T4szCym6e31EV8gafhsUB9CacwU0Fm4EUi4YNA8RlWq1YWJwTmzXylIT2kKP1dcNSkUkHFqtr5UYRrvwGAHjSA==",
+  "dgSpecHash": "BTIgzeaVyf8d+kttR4ORkgri9IIOVZbfAcUCH0G1BDxFVm+m9fqxQp486tT+JaqciwaWfDN/qdzwDxJZQUGa9w==",
   "success": true,
-  "projectFilePath": "c:\\Users\\pomah\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "c:\\Users\\Result\\!Repos\\Result\\ModBus\\ModBusLibrary\\ModBusLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Result\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.3\\microsoft.netframework.referenceassemblies.1.0.3.nupkg.sha512",
+    "C:\\Users\\Result\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net461\\1.0.3\\microsoft.netframework.referenceassemblies.net461.1.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

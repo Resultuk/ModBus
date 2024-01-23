@@ -28,7 +28,7 @@ namespace ModBusTest
             while(true)
             {
                 rv.ReadInputRegs(210, 50);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(100);
             }
         }
         public class MyDev(uint inputSize, uint holdSize) : ModBusDev(inputSize, holdSize)

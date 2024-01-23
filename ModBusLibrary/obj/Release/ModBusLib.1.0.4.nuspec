@@ -5,7 +5,7 @@
     <version>1.0.4</version>
     <authors>Result</authors>
     <description>Package Description</description>
-    <repository type="git" commit="32c1f2a30aa717166afd47acb009bd62b53b1dce" />
+    <repository type="git" commit="d022e627ee2a4311fa9136bc074cff51cf642e5d" />
     <dependencies>
       <group targetFramework=".NETFramework4.6.1" />
       <group targetFramework=".NETStandard2.1" />

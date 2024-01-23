@@ -51,8 +51,8 @@ namespace ModBusLibrary.Provider
             {
                 if (port.IsOpen)
                 {
-                    port.BaseStream.Close();
                     port.Close();
+                    Thread.Sleep(10);
                 }
                 return true;
             }

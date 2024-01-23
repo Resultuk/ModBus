@@ -19,7 +19,6 @@ c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.Asse
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.AssemblyInfo.cs
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.CoreCompileInputs.cache
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.sourcelink.json
-c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.CopyComplete
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.dll
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\refint\ModBusTest.dll
 c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.pdb
@@ -52,3 +51,4 @@ c:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.genru
 c:\Users\pomah\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ref\ModBusTest.dll
 c:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\unix\lib\net8.0\System.IO.Ports.dll
 c:\Users\pomah\!Repos\Result\ModBus\ModBusTest\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.IO.Ports.dll
+c:\Users\Result\!Repos\Result\ModBus\ModBusTest\obj\Debug\net8.0\ModBusTest.csproj.Up2Date
