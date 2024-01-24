@@ -71,7 +71,6 @@ namespace ModBusTest
                     }
                 }
             }
-            public uint Tip_PT2 => BitConverter.ToUInt32(GetHoldValue("Tip_PT2").Now.Flip(), 0);
             public static ModBusRegInfo[] GetModBusRegsInfo()
             {
                 return  [
