@@ -9,47 +9,47 @@ public static class Modbus
     private static Report Inquiry(IProvider provider, byte[] writeData, ref byte[] readData, int CountWaitBytes, int timeout = 550)
     {
         Report swapResult = new Report();
-        lock (provider.GetSynchro)
-        {
             swapResult = new Report() { Request = writeData };
-            try
+            lock (provider.GetSynchro)
             {
-                if (provider.Connect(timeout))
+                try
                 {
-                    swapResult.RequestTime = DateTime.Now;
-                    provider.Send(writeData);
-                    int countReadBytes = provider.Receive(ref readData, timeout);
-                    swapResult.ResponseTime = DateTime.Now;
-                    swapResult.Response = readData;
-                    swapResult.Result = ResultRequest.OK;
-                    if (!CRC16.Check(ref readData, countReadBytes))
+                    if (provider.Connect(timeout))
                     {
-                        swapResult.Result = ResultRequest.CRCError;
+                        swapResult.RequestTime = DateTime.Now;
+                        provider.Send(writeData);
+                        int countReadBytes = provider.Receive(ref readData, timeout);
+                        swapResult.ResponseTime = DateTime.Now;
+                        swapResult.Response = readData;
+                        swapResult.Result = ResultRequest.OK;
+                        if (!CRC16.Check(ref readData, countReadBytes))
+                        {
+                            swapResult.Result = ResultRequest.CRCError;
+                        }
+                        else
+                        {
+                            if (countReadBytes != CountWaitBytes)
+                            {
+                                swapResult.Result = ResultRequest.WrongRequest;
+                            }
+                            if (writeData[0] != readData[0])
+                            {
+                                swapResult.Result = ResultRequest.WrongResponce;
+                            }
+                        }
                     }
                     else
                     {
-                        if (countReadBytes != CountWaitBytes)
-                        {
-                            swapResult.Result = ResultRequest.WrongRequest;
-                        }
-                        if (writeData[0] != readData[0])
-                        {
-                            swapResult.Result = ResultRequest.WrongResponce;
-                        }
+                        swapResult.Result = ResultRequest.TransportError;
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    swapResult.Result = ResultRequest.TransportError;
-                }
+                    swapResult.ErrorMassage = ex.Message;
+                    swapResult.Result = ResultRequest.Error;
+                }   
+                provider.Disconnect();
             }
-            catch (Exception ex)
-            {
-                swapResult.ErrorMassage = ex.Message;
-                swapResult.Result = ResultRequest.Error;
-            }
-            provider.Disconnect();
-        }
         return swapResult;
     }
     public static Report ReadRegs(IProvider provider, uint netAddress = 1, byte function = 4, int startReg = 0, int countReg = 1, int timeout = 550)

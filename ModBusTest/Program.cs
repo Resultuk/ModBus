@@ -23,11 +23,15 @@ namespace ModBusTest
         {
             rv.Provider = new ComProvider(){ PortName = "COM2", BaudRate = 19200};
             rv.AddInputRegsInfo(MyDev.GetModBusRegsInfo());
+            rv.AddHoldRegsInfo(MyDev.GetModBusHoldRegInfo());
             rv.InputValueChanged += rv_InputValueChanged;
+            rv.HoldValueChanged += rv_HoldValueChanged;
 
             while(true)
             {
                 rv.ReadInputRegs(210, 50);
+                rv.ReadHoldRegs(16, 4);
+                rv.ReadHoldRegs(86, 2);
                 System.Threading.Thread.Sleep(100);
             }
         }
@@ -37,6 +41,37 @@ namespace ModBusTest
             public float P1 => BitConverter.ToSingle(GetInputValue("P1").Now.Flip(), 0);
             public float T2 => BitConverter.ToSingle(GetInputValue("T2").Now.Flip(), 0);
             public float P2 => BitConverter.ToSingle(GetInputValue("P2").Now.Flip(), 0);
+
+            public uint N2 => BitConverter.ToUInt32(GetHoldValue("N2").Now.Flip(), 0);
+            public ThermometerType TypeT1
+            {
+                get
+                {
+                    try
+                    {
+                        return (ThermometerType)BitConverter.ToUInt32(GetHoldValue("Tip_PT1").Now.Flip(), 0);
+                    }
+                    catch
+                    {
+                        return ThermometerType.Unknown;
+                    }
+                }
+            }
+            public ThermometerType TypeT2
+            {
+                get
+                {
+                    try
+                    {
+                        return (ThermometerType)BitConverter.ToUInt32(GetHoldValue("Tip_PT2").Now.Flip(), 0);
+                    }
+                    catch
+                    {
+                        return ThermometerType.Unknown;
+                    }
+                }
+            }
+            public uint Tip_PT2 => BitConverter.ToUInt32(GetHoldValue("Tip_PT2").Now.Flip(), 0);
             public static ModBusRegInfo[] GetModBusRegsInfo()
             {
                 return  [
@@ -49,6 +84,26 @@ namespace ModBusTest
                             new("P1",   256, ModBusType.Float), 
                             new("P2",   258, ModBusType.Float), 
                         ];
+            }
+            public static ModBusRegInfo[] GetModBusHoldRegInfo()
+            {
+                return new List<ModBusRegInfo>() {  
+                                                new ModBusRegInfo("N2", 86, ModBusType.UInt32),
+                                                new ModBusRegInfo("Tip_PT1", 16, ModBusType.UInt32),
+                                                new ModBusRegInfo("Tip_PT2", 18, ModBusType.UInt32),
+                                              }.ToArray();
+            }
+        }
+        static void rv_HoldValueChanged(object? sender, ModBusRegInfo[] e)
+        {
+            foreach(ModBusRegInfo item in e)
+            {
+                switch(item.Name)
+                {
+                    case "N2" :         Console.WriteLine($"N2 - {rv.N2}"); break;
+                    case "Tip_PT1" :    Console.WriteLine($"Тип датчика 1 - {rv.TypeT1}"); break;
+                    case "Tip_PT2" :    Console.WriteLine($"Тип датчика 2 - {rv.TypeT2}");break;
+                }
             }
         }
         static void rv_InputValueChanged(object? sender, ModBusRegInfo[] e)
@@ -66,6 +121,15 @@ namespace ModBusTest
             }
         }
 
+    }
+    public enum ThermometerType
+    {
+        Unknown = 0,
+        Pt100 = 1,
+        Pt500 = 2,
+        Pt1000 = 3,
+        _100П = 4,
+        _500П = 5,
     }
     public static class MyExtensions
     {

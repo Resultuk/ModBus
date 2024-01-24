@@ -40,7 +40,7 @@ namespace ModBusLibrary.Provider
                     port.Open();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -50,13 +50,14 @@ namespace ModBusLibrary.Provider
             try
             {
                 if (port.IsOpen)
-                {
+                {             
+                    port.DiscardInBuffer();
+                    port.DiscardOutBuffer();                  
                     port.Close();
-                    Thread.Sleep(10);
                 }
                 return true;
             }
-            catch (Exception) 
+            catch (Exception ex) 
             {
                 return false;
             }

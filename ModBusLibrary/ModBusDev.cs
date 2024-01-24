@@ -9,20 +9,24 @@ namespace ModBusLibrary
     {
         private readonly Dictionary<string, ModBusRegInfo> holdsInfo = new Dictionary<string, ModBusRegInfo>();
         private readonly Dictionary<string, ModBusRegInfo> inputsInfo = new Dictionary<string, ModBusRegInfo>();
-        private readonly byte[] holdsIN = new byte[0];
-        private readonly byte[] holdsOUT = new byte[0];
+        private readonly byte[] holdIN = new byte[0];
+        private readonly byte[] holdOUT = new byte[0];
+        private readonly byte[] holdCASH = new byte[0];
         private readonly byte[] inputIN = new byte[0];
         private readonly byte[] inputCASH = new byte[0];
         public ModBusDev(uint inputSize, uint holdSize)
         {
-            holdsIN = new byte[holdSize];
-            holdsOUT = new byte[holdSize];
+            holdIN = new byte[holdSize];
+            holdOUT = new byte[holdSize];
+            holdCASH= new byte[holdSize];
             inputIN = new byte[inputSize];
             inputCASH = new byte[inputSize];
+
             for(int i = 0 ; i < holdSize; i++)
             {
-                holdsIN[i] = 0xFF;
-                holdsOUT[i] = 0xFF;
+                holdIN[i] = 0xFF;
+                holdOUT[i] = 0xFF;
+                holdCASH[i] = 0xFF;
             }
             for(int i = 0 ; i < inputSize; i++)
             {
@@ -34,11 +38,11 @@ namespace ModBusLibrary
         public uint WaitingTime { get; set; }
         public IProvider Provider {get; set; }
         public uint LengthInputs => (uint)inputIN.Length;
-        public uint LengthHolds => (uint)holdsIN.Length;
-        public bool AnyDataForWriting => !Enumerable.SequenceEqual(holdsIN, holdsOUT);
+        public uint LengthHolds => (uint)holdIN.Length;
+        public bool AnyDataForWriting => !Enumerable.SequenceEqual(holdIN, holdOUT);
         public void UndoChanges()
         {
-            holdsIN.CopyTo(holdsOUT, 0);
+            holdIN.CopyTo(holdOUT, 0);
         }
         public int AddHoldRegsInfo(ModBusRegInfo[] modBusRegInfos)
         {
@@ -90,17 +94,46 @@ namespace ModBusLibrary
             }
             return report;
         }
+        public Report ReadHoldRegs(ushort startReg, ushort countRegs)
+        {
+            int startbyte = startReg * 2;
+
+            int countbyte = countRegs * 2;
+
+            if (countRegs == 0 || countRegs > 127 || startbyte + countbyte > LengthInputs) return new Report { Result = ResultRequest.WrongRequest };
+
+            Report report = Modbus.ReadRegs(Provider, NetAddress, (byte)ModBusFunc.ReadHold, startReg, countRegs, (int)WaitingTime);
+
+            if (report.Result == ResultRequest.OK)
+            {
+                ToHoldRegs(report.Response.Skip(3).Take(countbyte).ToArray(), startbyte, countbyte);
+            }
+            return report;
+        }
         private void ToInputRegs(byte[] buffer, int offset, int count)
         {
             if (buffer == null || buffer.Length == 0 || offset < 0 || count < 1) throw new ArgumentException();
             Array.Copy(inputIN, offset, inputCASH, offset, count);
             Array.Copy(buffer, 0, inputIN, offset, count);
-            List<uint> bytesList = GetChangingBytes(offset, count);
+            List<uint> bytesList = GetChangingInputBytes(offset, count);
             if(bytesList.Count > 0)
             {
                 ModBusRegInfo[] modBusRegs = GetInputsFromByteList(bytesList);
                 if(modBusRegs.Length > 0)
                     InputValueChanged?.Invoke(this, modBusRegs);
+            }
+        }
+        private void ToHoldRegs(byte[] buffer, int offset, int count)
+        {
+            if (buffer == null || buffer.Length == 0 || offset < 0 || count < 1) throw new ArgumentException();
+            Array.Copy(holdIN, offset, holdCASH, offset, count);
+            Array.Copy(buffer, 0, holdIN, offset, count);
+            List<uint> bytesList = GetChangingHoldBytes(offset, count);
+            if(bytesList.Count > 0)
+            {
+                ModBusRegInfo[] modBusRegs = GetHoldsFromByteList(bytesList);
+                if(modBusRegs.Length > 0)
+                    HoldValueChanged?.Invoke(this, modBusRegs);
             }
         }
         private ModBusRegInfo[] GetInputsFromByteList(List<uint> bytesList)
@@ -116,12 +149,33 @@ namespace ModBusLibrary
             }
             return Result.Distinct().ToArray();
         }
-        private List<uint> GetChangingBytes(int count = 0, int offset = 0)
+        private ModBusRegInfo[] GetHoldsFromByteList(List<uint> bytesList)
+        {
+            List<ModBusRegInfo> Result = new List<ModBusRegInfo>();
+            foreach(uint byteNum in bytesList)
+            {
+               foreach (var item in holdsInfo.Values)
+                {
+                    if (item.Address <= byteNum && byteNum < item.Address + item.Length)
+                        Result.Add(item);
+                }
+            }
+            return Result.Distinct().ToArray();
+        }
+        private List<uint> GetChangingInputBytes(int count = 0, int offset = 0)
         {
             if(count == 0) count = (int)LengthInputs;
             List<uint> result = new List<uint>();
             for (int i = offset; i < offset + count; i++)
                     if (inputIN[i] != inputCASH[i]) result.Add((ushort)i);
+            return result;
+        }
+        private List<uint> GetChangingHoldBytes(int count = 0, int offset = 0)
+        {
+            if(count == 0) count = (int)LengthInputs;
+            List<uint> result = new List<uint>();
+            for (int i = offset; i < offset + count; i++)
+                    if (holdIN[i] != holdCASH[i]) result.Add((ushort)i);
             return result;
         }
         public ModBusRegValue GetInputValue(ModBusRegInfo regInfo)
@@ -139,6 +193,18 @@ namespace ModBusLibrary
                                         inputCASH.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
                                         Array.Empty<byte>()
                                     );
+            }
+            return new ModBusRegValue(new byte[0], new byte[0], new byte[0]);
+        }
+        public ModBusRegValue GetHoldValue(string regInfoName)
+        {
+            if(holdsInfo.TryGetValue(regInfoName, out ModBusRegInfo regInfo))
+            {
+                return new ModBusRegValue(  
+                                            holdIN.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                            holdCASH.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray(), 
+                                            holdOUT.Skip((int)regInfo.Address).Take(regInfo.Length).ToArray()
+                                         );
             }
             return new ModBusRegValue(new byte[0], new byte[0], new byte[0]);
         }
